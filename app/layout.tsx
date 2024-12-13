@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { VisualEditing } from "next-sanity";
-import { SanityLive } from "@/sanity/lib/live";
+// import { SanityLive } from "@/sanity/lib/live";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { draftMode } from "next/headers";
@@ -32,7 +32,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <SanityLive />
+        {/* <SanityLive /> */}
         {(await draftMode()).isEnabled && (
           <>
             <DisableDraftMode />

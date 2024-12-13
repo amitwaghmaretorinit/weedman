@@ -1,11 +1,10 @@
 import { type SchemaTypeDefinition } from "sanity";
+import page from "./page";
 import hero from "./hero";
-import feature from "./feature";
-import location from "./location";
-import testimonial from "./testimonial";
-import resourceCard from "./resourceCard";
-import gallery from "./gallery";
+import program from "./program";
+import language from "./language";
+import translations from "./translations";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [hero, feature, location, testimonial, resourceCard, gallery],
+  types: [page,hero,program,language,translations],
 };
