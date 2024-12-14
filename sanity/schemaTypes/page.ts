@@ -1,5 +1,5 @@
-import { defineType } from "sanity"
-import { checkDuplicateLanguage } from "../lib/utils";
+import MultilingualTitleInput from '@/components/MultilingualTitleInput';
+import { defineArrayMember, defineType } from 'sanity';
 
 export default defineType({
     name: 'page',
@@ -7,52 +7,74 @@ export default defineType({
     title: 'Page',
     preview: {
         select: {
-            title: 'title.title_translations.0.title_value',
+            title: 'title.translations[0].text', // Example: Preview English title
         },
         prepare(selection) {
             return {
-                title:  selection.title || "No Title",
+                title: selection.title || 'No Title',
             };
-        }
+        },
     },
     fields: [
         {
             name: 'title',
             type: 'object',
             title: 'Title',
-            validation: Rule => Rule.required(),
             fields: [
                 {
-                    name: 'title_translations',
+                    name: 'translations',
                     type: 'array',
-                    title: 'Title Translations',
                     of: [
                         {
-                            type: 'translations',
-                        },
-                    ],
-                    validation: Rule => Rule.custom(checkDuplicateLanguage),
-                },
+                            type: 'object',
+                            fields: [
+                                { name: 'language', type: 'reference', to: [{ type: 'language' }] },
+                                { name: 'text', type: 'string' }
+                            ]
+                        }
+                    ]
+                }
             ],
+            components: {
+                input: MultilingualTitleInput
+            }
         },
         {
             name: 'slug',
             type: 'object',
             title: 'Slug',
-            validation: Rule => Rule.required(),
             fields: [
                 {
-                    name: 'slug_translations',
+                    name: 'translations',
                     type: 'array',
-                    title: 'Slug Translations',
                     of: [
                         {
-                            type: 'translations',
-                        },
-                    ],
-                    validation: Rule => Rule.custom(checkDuplicateLanguage),
-                },
+                            type: 'object',
+                            fields: [
+                                { name: 'language', type: 'reference', to: [{ type: 'language' }] },
+                                { name: 'text', type: 'string' }
+                            ]
+                        }
+                    ]
+                }
             ],
+            components: {
+                input: MultilingualTitleInput
+            }
         },
+        {
+            name: 'path',
+            type: 'slug',
+            title: 'Path',
+            validation: Rule => Rule.required(),
+        },
+        {
+            name: 'sections',
+            type: 'array',
+            title: 'Page Sections',
+            of: [
+                defineArrayMember({ type: 'hero' }),
+            ]
+        }
     ],
 });

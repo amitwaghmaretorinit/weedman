@@ -2,6 +2,7 @@
 import { createDataAttribute, useOptimistic } from '@sanity/visual-editing'
 import type { SanityDocument } from '@sanity/client'
 import Hero from '@/components/sections/hero'
+import { config } from '@/lib/constants'
 
 // Minimal type definitions
 type PageSection = {
@@ -19,15 +20,6 @@ type SectionsProps = {
     documentId: string
     documentType: string
     sections?: PageSection[]
-}
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
-
-// Your Sanity configuration
-const config = {
-    projectId: projectId,
-    dataset: dataset,
-    baseUrl: 'http://localhost:3000/studio',
 }
 
 export function Sections({ documentId, documentType, sections: initialSections }: SectionsProps) {
