@@ -1,20 +1,33 @@
 import { defineType } from "sanity";
+import { languageConfig } from '@/lib/constants';
 
 export default defineType({
   name: "hero",
   title: "Hero Section",
   type: "document",
+  preview: {
+    select: {
+      title: 'mainHeading.translations[0].text',
+    },
+    prepare(selection) {
+      return {
+        title: selection.title || 'No Title',
+      };
+    },
+  },
   fields: [
     {
       name: "mainHeading",
       title: "Main Heading",
-      type: "string",
+      type: "object",
       validation: (Rule) => Rule.required(),
+      ...languageConfig
     },
     {
       name: "subheading",
       title: "Subheading",
-      type: "text",
+      type: "object",
+      ...languageConfig
     },
     {
       name: "backgroundImage",
@@ -39,7 +52,8 @@ export default defineType({
         {
           name: "text",
           title: "Button Text",
-          type: "string",
+          type: "object",
+          ...languageConfig
         },
         {
           name: "link",

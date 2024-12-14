@@ -1,4 +1,4 @@
-import MultilingualTitleInput from '@/components/MultilingualTitleInput';
+import { languageConfig } from '@/lib/constants';
 import { defineArrayMember, defineType } from 'sanity';
 
 export default defineType({
@@ -7,7 +7,7 @@ export default defineType({
     title: 'Page',
     preview: {
         select: {
-            title: 'title.translations[0].text', // Example: Preview English title
+            title: 'title.translations[0].text',
         },
         prepare(selection) {
             return {
@@ -20,47 +20,13 @@ export default defineType({
             name: 'title',
             type: 'object',
             title: 'Title',
-            fields: [
-                {
-                    name: 'translations',
-                    type: 'array',
-                    of: [
-                        {
-                            type: 'object',
-                            fields: [
-                                { name: 'language', type: 'reference', to: [{ type: 'language' }] },
-                                { name: 'text', type: 'string' }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            components: {
-                input: MultilingualTitleInput
-            }
+             ...languageConfig
         },
         {
             name: 'slug',
             type: 'object',
             title: 'Slug',
-            fields: [
-                {
-                    name: 'translations',
-                    type: 'array',
-                    of: [
-                        {
-                            type: 'object',
-                            fields: [
-                                { name: 'language', type: 'reference', to: [{ type: 'language' }] },
-                                { name: 'text', type: 'string' }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            components: {
-                input: MultilingualTitleInput
-            }
+            ...languageConfig
         },
         {
             name: 'path',

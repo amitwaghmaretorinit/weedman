@@ -1,3 +1,5 @@
+"use client"
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Box, Stack, Text, TextInput } from '@sanity/ui';

@@ -2,7 +2,6 @@
 
 import { Sections } from '@/components/sections/section';
 import { getPageData } from '@/sanity/lib/api';
-import Head from 'next/head';
 import { notFound } from 'next/navigation';
 
 const Page = async (props: any) => {
@@ -12,22 +11,15 @@ const Page = async (props: any) => {
   if (!data) {
     notFound()
   }
-  console.log({data})
   return (
-    <>
-      <Head>
-        <title>My Next.js App</title>
-        <meta name="description" content="This is an example Next.js App using the App Router" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    
       <main>
-        <Sections
+        {/* <Sections
           documentId={data._id}
           documentType={data._type}
           sections={data.sections}
-        />
+        /> */}
       </main>
-    </>
   )
 }
 

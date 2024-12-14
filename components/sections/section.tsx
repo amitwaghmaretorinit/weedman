@@ -20,9 +20,10 @@ type SectionsProps = {
     documentId: string
     documentType: string
     sections?: PageSection[]
+    languageRef?: string;
 }
 
-export function Sections({ documentId, documentType, sections: initialSections }: SectionsProps) {
+export function Sections({ documentId, documentType, sections: initialSections, languageRef }: SectionsProps) {
     const sections = useOptimistic<PageSection[] | undefined, SanityDocument<PageData>>(
         initialSections,
         (currentSections, action) => {
@@ -57,8 +58,8 @@ export function Sections({ documentId, documentType, sections: initialSections }
                             path: `sections[_key=="${section._key}"]`,
                         }).toString()}
                     >
-                        {section._type === "hero" && <Hero hero={section} />}
-                        </div>
+                        {section._type === "hero" && <Hero hero={section} languageRef={languageRef} />}
+                    </div>
 
                 )
             })}
